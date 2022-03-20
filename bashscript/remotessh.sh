@@ -1,4 +1,3 @@
-<<<<<<< HEAD:remotessh.sh
 #!/bin/bash
 ############################################################################
 #Author: Hafid                                                             #
@@ -195,7 +194,6 @@ echo "${yellow}Program terminated.....!${clear}"
 
 local_chk
 main_menu
-=======
 #!/bin/bash
 ############################################################################
 #Author: Hafid                                                             #
@@ -393,4 +391,3 @@ echo "${yellow}Program terminated.....!${clear}"
 
 local_chk
 main_menu
->>>>>>> 4dd2e5542d2ee7d5d74a344e1318e6d8e6fd950d:bashscript/remotessh.sh
