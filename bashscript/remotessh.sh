@@ -86,31 +86,27 @@ num_days() {
     local input_user
     read -p "${green}Input user ssh: ${clear}"
     input_user
-    sleep .1
     local input_pass
     read -p "${green}Input ssh user password: ${clear}"
     input_pass
-    sleep .1
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
-    sleep .1
     local n_days
     read -p "${green}input number of days: ${clear}" n_days
     number_validate
-    sleep .1
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
 
     local days=days
-    local account_ex=$(chage -l $acc_name | grep 'Account expires' | cut -d : -f2)
+    local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
 
     for serv_list in $(cat $file)
     do
     echo "======================================"
     echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -E $(date -d +$n_days$days +%Y-%m-%d) $acc_name" "chage -l $acc_name | grep 'Account expires' | cut -d : -f2"
+        for each_cmd in "sudo -S chage -E $(date -d +$n_days$days +%Y-%m-%d) $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
@@ -124,15 +120,12 @@ date_formate() {
     local input_user
     read -p "${green}Input user ssh${clear}"
     input_user
-    sleep .1
     local input_pass
     read -p "${green}Input ssh user password${clear}"
     input_pass
-    sleep .1
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
-    sleep .1
     local d_formate
     read -p "${green}Input Formate Date eg YYYY-MM-DD: ${clear}" d_formate
     date -d $d_formate 2>&1 >/dev/null
@@ -140,12 +133,12 @@ date_formate() {
             echo "${yellow}Date formate is not valid${clear}"
             exit
         fi
-    sleep .1
+        
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
         
-    local account_ex=$(chage -l $acc_name | grep 'Account expires' | cut -d : -f2)
+    local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
 
     for serv_list in $(cat $file)
     do
