@@ -120,7 +120,7 @@ date_formate() {
     read -p "${green}Input user ssh: ${clear}" input_user
     input_user
     local input_pass
-    read -p "${green}Input ssh user password: ${clear}" input_user
+    read -e-p "${green}Input ssh user password: ${clear}" input_pass
     input_pass
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
