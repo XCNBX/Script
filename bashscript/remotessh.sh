@@ -98,57 +98,19 @@ num_days() {
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
 
-    local days=days
     local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
 
     for serv_list in $(cat $file)
     do
     echo "======================================"
     echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -E $(date -d +$n_days$days +%Y-%m-%d) $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
+        for each_cmd in "sudo -S chage -M $n_days $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
         do
         echo "====================================================="
-        sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
+        sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
     done
 done 2>&1 >>$output
 
-}
-
-
-date_formate() {
-    local input_user
-    read -p "${green}Input user ssh: ${clear}" input_user
-    user_validate
-    local input_pass
-    read -e -p "${green}Input ssh user password: ${clear}" input_pass
-    pass_validate
-    local file
-    read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
-    file_validate
-    local d_formate
-    read -p "${green}Input Formate Date eg YYYY-MM-DD: ${clear}" d_formate
-    date -d $d_formate 2>&1 >/dev/null
-        if [[ $? -ne 0 ]]; then
-            echo "${yellow}Date formate is not valid${clear}"
-            exit
-        fi
-
-    local acc_name
-    read -p "${green}Input Account Name: ${clear}" acc_name
-    string_validate
-        
-    local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
-
-    for serv_list in $(cat $file)
-    do
-    echo "======================================"
-    echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -d $d_formate $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
-        do
-        echo "====================================================="
-        sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-        done
-    done 2>&1 >>$output
 }
 
 main_menu() {
