@@ -44,6 +44,7 @@ input_user() {
 input_pass() {
     if [[ -z $input_pass ]]; then
         echo -e "{$yellow}input cannot be blank${clear}"
+        exit
         
     fi
 }
