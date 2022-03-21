@@ -82,10 +82,10 @@ string_validate() {
 
 num_days() {
     local input_user
-    read -p "${green}Input user ssh: ${clear}"
+    read -p "${green}Input user ssh: ${clear}" input_user
     input_user
     local input_pass
-    read -p "${green}Input ssh user password: ${clear}"
+    read -p "${green}Input ssh user password: ${clear}" input_pass
     input_pass
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
@@ -116,10 +116,10 @@ done 2>&1 >>$output
 
 date_formate() {
     local input_user
-    read -p "${green}Input user ssh${clear}"
+    read -p "${green}Input user ssh: ${clear}" input_user
     input_user
     local input_pass
-    read -p "${green}Input ssh user password${clear}"
+    read -p "${green}Input ssh user password: ${clear}" input_user
     input_pass
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
