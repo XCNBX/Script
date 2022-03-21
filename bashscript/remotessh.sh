@@ -34,14 +34,14 @@ header() {
     echo "-------------------------------------------------------------" >>$output
 }
 
-input_user() {
+user_validate() {
     if [[ -z $input_user ]]; then
         echo -e "{$yellow}input cannot be blank${clear}"
         exit
     fi
 }
 
-input_pass() {
+pass_validate() {
     if [[ -z $input_pass ]]; then
         echo -e "{$yellow}input cannot be blank${clear}"
         exit
@@ -84,10 +84,10 @@ string_validate() {
 num_days() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
-    input_user
+    user_validate
     local input_pass
     read -e -p "${green}Input ssh user password: ${clear}" input_pass
-    input_pass
+    pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
@@ -118,10 +118,10 @@ done 2>&1 >>$output
 date_formate() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
-    input_user
+    user_validate
     local input_pass
     read -e -p "${green}Input ssh user password: ${clear}" input_pass
-    input_pass
+    pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
