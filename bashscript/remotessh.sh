@@ -1,10 +1,7 @@
 #!/bin/bash
 ############################################################################
 #Author: Hafid                                                             #
-#Purpose: This script for add user acc expires                             #
-#you can edit and modify as you like, dont forget credit                   #
-#contact: hafid.dave@gmail.com                                             #
-#please consider to change variable you wish                               #
+#contact: hafid.dave@gmail.com                                             #                           #
 ############################################################################
 
 red=$'\033[0;31m'

@@ -1,10 +1,7 @@
 #!/bin/bash
 ############################################################################
 #Author: Hafid                                                             #
-#Purpose: This script for checking user account expires then sending email #
-#you can edit and modify as you like, dont forget credit                   #
-#contact: hafid.dave@gmail.com                                             #
-#please consider to change variable acc to username want to check          #
+#contact: hafid.dave@gmail.com                                             #        #
 ############################################################################
 
 log="action.log"
