@@ -6,6 +6,7 @@
 #contact: hafid.dave@gmail.com                                             #
 #please consider to change variable you wish                               #
 ############################################################################
+
 red=$'\033[0;31m'
 green=$'\033[0;32m'
 yellow=$'\033[0;33m'
@@ -133,7 +134,7 @@ date_formate() {
             echo "${yellow}Date formate is not valid${clear}"
             exit
         fi
-        
+
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
