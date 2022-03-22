@@ -140,9 +140,9 @@ acc_ex() {
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
-    local n_days
+    local d_format
     read -p "${green}input date format (YYY-MM-DD): ${clear}" d_format
-    number_validate
+    date_validate
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
@@ -153,7 +153,7 @@ acc_ex() {
     do
     echo "======================================"
     echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -M $n_days $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
+        for each_cmd in "sudo -S chage -E $d_format $acc_name" "chage -l $acc_name | grep 'Account expires' | cut -d : -f2"
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
@@ -172,9 +172,9 @@ pass_date() {
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
-    local n_days
-    read -p "${green}input number of days: ${clear}" n_days
-    number_validate
+    local d_format
+    read -p "${green}input date format (YYYY-MM-DD): ${clear}" d_format
+    date_validate
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
     string_validate
@@ -185,7 +185,7 @@ pass_date() {
     do
     echo "======================================"
     echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -M $n_days $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
+        for each_cmd in "sudo -S chage -d $d_format $acc_name" "chage -l $acc_name | grep 'Last password chage' | cut -d : -f2"
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
