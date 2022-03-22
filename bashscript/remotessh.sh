@@ -15,7 +15,7 @@ clear=$'\033[0m'
 output="server_target.$(date +'%Y-%m-%d').info.txt"
 
 banner(){
-cat << EOF
+cat << "EOF"
  __    __  _______  ______ 
 |  \  /  \|       \|      \
 | $$ /  $$| $$$$$$$\\$$$$$$
