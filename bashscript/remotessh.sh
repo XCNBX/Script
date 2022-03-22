@@ -13,13 +13,20 @@ cyan=$'\033[0;36m'
 clear=$'\033[0m'
 
 output="server_target.$(date +'%Y-%m-%d').info.txt"
-
 banner(){
-echo "--------------------------------------------------------------------------------"
-echo -e "${green}This Script is for add more days to expire account${clear}"
-echo -e "${green}Please make sure target server running root privilage or sudo${clear}"
-echo -e "${green}Please remember this script add more days the account expires based on date now${clear}"
-echo "--------------------------------------------------------------------------------"
+echo
+echo "
+ __    __  _______  ______ 
+|  \  /  \|       \|      \
+| $$ /  $$| $$$$$$$\\$$$$$$
+| $$/  $$ | $$__/ $$ | $$  
+| $$  $$  | $$    $$ | $$  
+| $$$$$\  | $$$$$$$  | $$  
+| $$ \$$\ | $$      _| $$_ 
+| $$  \$$\| $$     |   $$ \
+ \$$   \$$ \$$      \$$$$$$
+
+Develop By Hafid"
 }
 
 local_chk() {
@@ -34,6 +41,14 @@ header() {
     echo "-------------------------------------------------------------" >>$output
     echo "$@" >>$output
     echo "-------------------------------------------------------------" >>$output
+}
+
+date_validate(){
+    date "+%Y-%m-%d" -d $d_format
+    if [[ $? -ne 0 ]]; then
+        echo -e "${yellow}Please Input valid date format retry${clear}"
+        exit
+    fi
 }
 
 user_validate() {
