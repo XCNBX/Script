@@ -110,7 +110,6 @@ pass_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
-    local prompt="${green}Input password ssh: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
@@ -141,7 +140,6 @@ acc_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
-    local prompt="${green}Input password ssh: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
@@ -172,6 +170,7 @@ pass_date() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
+    pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
