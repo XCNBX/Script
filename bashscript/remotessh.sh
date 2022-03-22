@@ -61,11 +61,16 @@ user_validate() {
 }
 
 pass_validate() {
-    if [[ -z $input_pass ]]; then
-        echo -e "{$yellow}input cannot be blank retry${clear}"
-        exit
-        
+    unset password
+    while IFS= read -p "$prompt" -r -s -n 1 input_pass
+    do
+    if [[ $char == $'\0' ]]
+    then
+        break
     fi
+    prompt='*'
+    password+="$input_pass"
+done
 }
 
 file_validate() {
@@ -104,8 +109,7 @@ pass_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
-    local input_pass
-    read -e -s -p "${green}Input ssh user password: ${clear}" input_pass
+    local prompt="${green}Input password ssh: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
@@ -136,8 +140,7 @@ acc_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
-    local input_pass
-    read -e -s -p "${green}Input ssh user password: ${clear}" input_pass
+    local prompt="${green}Input password ssh: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
@@ -168,8 +171,7 @@ pass_date() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
-    local input_pass
-    read -e -s -p "${green}Input ssh user password: ${clear}" input_pass
+    local prompt="${green}Input password ssh: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
