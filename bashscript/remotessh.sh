@@ -14,11 +14,13 @@ clear=$'\033[0m'
 
 output="server_target.$(date +'%Y-%m-%d').info.txt"
 
+banner(){
 echo "--------------------------------------------------------------------------------"
 echo -e "${green}This Script is for add more days to expire account${clear}"
 echo -e "${green}Please make sure target server running root privilage or sudo${clear}"
 echo -e "${green}Please remember this script add more days the account expires based on date now${clear}"
 echo "--------------------------------------------------------------------------------"
+}
 
 local_chk() {
     local meid=$(id -u)
@@ -81,7 +83,71 @@ string_validate() {
     fi
 }
 
-num_days() {
+pass_ex() {
+    local input_user
+    read -p "${green}Input user ssh: ${clear}" input_user
+    user_validate
+    local input_pass
+    read -e -p "${green}Input ssh user password: ${clear}" input_pass
+    pass_validate
+    local file
+    read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
+    file_validate
+    local n_days
+    read -p "${green}input number of days: ${clear}" n_days
+    number_validate
+    local acc_name
+    read -p "${green}Input Account Name: ${clear}" acc_name
+    string_validate
+
+    local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
+
+    for serv_list in $(cat $file)
+    do
+    echo "======================================"
+    echo "Executing command on $serv_list"
+        for each_cmd in "sudo -S chage -M $n_days $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
+        do
+        echo "====================================================="
+        sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
+    done
+done 2>&1 >>$output
+
+}
+
+acc_ex() {
+    local input_user
+    read -p "${green}Input user ssh: ${clear}" input_user
+    user_validate
+    local input_pass
+    read -e -p "${green}Input ssh user password: ${clear}" input_pass
+    pass_validate
+    local file
+    read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
+    file_validate
+    local n_days
+    read -p "${green}input number of days: ${clear}" n_days
+    number_validate
+    local acc_name
+    read -p "${green}Input Account Name: ${clear}" acc_name
+    string_validate
+
+    local account_ex=$(chage -l $acc_name | grep 'Password expires' | cut -d : -f2)
+
+    for serv_list in $(cat $file)
+    do
+    echo "======================================"
+    echo "Executing command on $serv_list"
+        for each_cmd in "sudo -S chage -M $n_days $acc_name" "chage -l $acc_name | grep 'Password expires' | cut -d : -f2"
+        do
+        echo "====================================================="
+        sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
+    done
+done 2>&1 >>$output
+
+}
+
+pass_date() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
@@ -117,10 +183,12 @@ main_menu() {
     DELAY=.5
 while true; do
     clear
+    banner
 	cat << EOF
         ${yellow}Please Select Your Action:${clear}
-        1. ${green}Extend Account by number of days${clear}
-        2. ${cyan}Extend Account by date formate${clear}
+        1. Extend Password expires
+        2. Extend Account expires
+        3. change "Last password change" date
         0. ${yellow}Quit${clear}
 EOF
     read -p "${yellow}Enter selection [0-3] > ${clear}"
@@ -129,11 +197,15 @@ EOF
             break
             ;;
         1)
-            num_days
+            pass_ex
             exit
             ;;
         2)
-            date_formate
+            acc_ex
+            exit
+            ;;
+        3)
+            pass_date
             exit
             ;;
         *)
