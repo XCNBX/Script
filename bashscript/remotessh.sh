@@ -38,14 +38,14 @@ header() {
 
 user_validate() {
     if [[ -z $input_user ]]; then
-        echo -e "{$yellow}input cannot be blank${clear}"
+        echo -e "{$yellow}input cannot be blank retry${clear}"
         exit
     fi
 }
 
 pass_validate() {
     if [[ -z $input_pass ]]; then
-        echo -e "{$yellow}input cannot be blank${clear}"
+        echo -e "{$yellow}input cannot be blank retry${clear}"
         exit
         
     fi
@@ -54,9 +54,9 @@ pass_validate() {
 file_validate() {
 
     if [[ -z $file ]]; then
-        echo -e "${yellow}Input cannot be blank${clear}"
+        echo -e "${yellow}Input cannot be blank retry${clear}"
     elif ! [[ -f $file ]]; then
-        echo -e "${yellow}File does not exist validate file${clear}"
+        echo -e "${yellow}File does not exist validate file retry${clear}"
         exit
     fi
 
@@ -65,9 +65,9 @@ file_validate() {
 number_validate() {
 
     if [[ -z $n_days ]]; then
-        echo -e "${yellow}Input cannot be blank${clear}"
+        echo -e "${yellow}Input cannot be blank retry${clear}"
     elif ! [[ $n_days =~ ^[0-9]+$ ]] || [[ $n_days =~ ^[A-Za-z]+$ ]]; then
-        echo -e "${yellow}Input must be digit Please validate input${clear}"
+        echo -e "${yellow}Input must be digit Please validate input retry${clear}"
         exit
     fi
 
@@ -76,9 +76,9 @@ number_validate() {
 string_validate() {
 
     if [[ -z $acc_name ]]; then
-        echo -e "${yellow}Input cannot be blank${clear}"
+        echo -e "${yellow}Input cannot be blank retry${clear}"
     elif ! [[ $acc_name =~ ^[A-Za-z]+$ ]] || [[ $acc_name =~ ^[0-9]+$ ]]; then
-        echo -e "${yellow}Input must be character please validate input${clear}"
+        echo -e "${yellow}Input must be character please validate input retry${clear}"
         exit
     fi
 }
@@ -126,7 +126,7 @@ acc_ex() {
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
     local n_days
-    read -p "${green}input number of days: ${clear}" n_days
+    read -p "${green}input date format (YYY-MM-DD): ${clear}" d_format
     number_validate
     local acc_name
     read -p "${green}Input Account Name: ${clear}" acc_name
