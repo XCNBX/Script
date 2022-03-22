@@ -15,8 +15,7 @@ clear=$'\033[0m'
 output="server_target.$(date +'%Y-%m-%d').info.txt"
 
 banner(){
-echo
-echo "
+cat << EOF
  __    __  _______  ______ 
 |  \  /  \|       \|      \
 | $$ /  $$| $$$$$$$\\$$$$$$
@@ -27,7 +26,8 @@ echo "
 | $$  \$$\| $$     |   $$ \
  \$$   \$$ \$$      \$$$$$$
 
-Develop By Hafid"
+Develop By Hafid
+EOF
 }
 
 local_chk() {
