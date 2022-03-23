@@ -62,7 +62,7 @@ user_validate() {
 
 pass_validate() {
     if [[ "$first_validate" = "$input_pass" ]]; then
-        echo -e "${green}Password Match continue${clear}"
+        echo -e "${yellow}Password Match continue${clear}"
     else
         echo -e "${yellow}Password not match enter again retry${clear}"
         exit
