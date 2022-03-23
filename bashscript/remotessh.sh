@@ -134,7 +134,7 @@ pass_ex() {
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
     done 2>&1 | tee -a $output
-done
+done 2>&1 | tee -a $output
 
 }
 
@@ -171,7 +171,7 @@ acc_ex() {
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
     done 2>&1 | tee -a $output
-done
+done 2>&1 | tee -a $output
 
 }
 
@@ -208,7 +208,7 @@ pass_date() {
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
     done 2>&1 | tee -a $output
-done
+done 2>&1 | tee -a $output
 
 }
 
