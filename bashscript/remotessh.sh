@@ -61,8 +61,10 @@ user_validate() {
 }
 
 pass_validate() {
-    if [[ -z $input_pass ]]; then
-        echo -e "${yellow}password cannot be blank retry..${clear}"
+    if [[ $first_validate == $input_pass ]]; then
+        echo -e "${green}Password Match continue${clear}"
+    else
+        echo -e "Password not match enter again retry${clear}"
         exit
     fi
 }
@@ -103,8 +105,15 @@ pass_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
+
     local input_pass
-    read -e -p "${green}Input ssh password: ${clear}" -s input_pass
+    echo -n -e "${green}Input password ssh: ${clear}"
+    read -s first_validate
+    echo
+    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    echo
+    pass_validate
+
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
@@ -134,8 +143,15 @@ acc_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
+    
     local input_pass
-    read -e -p "${green}Input ssh password: ${clear}" -s input_pass
+    echo -n -e "${green}Input password ssh: ${clear}"
+    read -s first_validate
+    echo
+    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    echo
+    pass_validate
+
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
@@ -165,8 +181,15 @@ pass_date() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
+    
     local input_pass
-    read -e -p "${green}Input ssh password: ${clear}" -s input_pass
+    echo -n -e "${green}Input password ssh: ${clear}"
+    read -s first_validate
+    echo
+    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    echo
+    pass_validate
+    
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
