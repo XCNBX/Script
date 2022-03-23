@@ -107,11 +107,9 @@ pass_ex() {
     user_validate
 
     local input_pass
-    echo -n -e "${green}Input password ssh: ${clear}"
-    read -s first_validate
+    read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
-    echo
     pass_validate
 
     local file
@@ -145,11 +143,9 @@ acc_ex() {
     user_validate
     
     local input_pass
-    echo -n -e "${green}Input password ssh: ${clear}"
-    read -s first_validate
+    read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
-    echo
     pass_validate
 
     local file
@@ -183,11 +179,9 @@ pass_date() {
     user_validate
     
     local input_pass
-    echo -n -e "${green}Input password ssh: ${clear}"
-    read -s first_validate
+    read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
-    echo
     pass_validate
 
     local file
