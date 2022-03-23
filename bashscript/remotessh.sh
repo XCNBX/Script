@@ -61,23 +61,15 @@ user_validate() {
 }
 
 pass_validate() {
-    local input_pass
     unset password
-    echo -n "Enter password: "
     while IFS= read -p "$prompt" -r -s -n 1 input_pass
     do
-    # Enter - accept password
-    if [[ $char == $'\0' ]] ; then
+        if [[ $char == $'\0' ]]; then
+
         break
     fi
-    # Backspace
-    if [[ $char == $'\177' ]] ; then
-        prompt=$'\b \b'
-        password="${password%?}"
-    else
-        prompt='*'
-        password+="$input_pass"
-    fi
+    prompt='*'
+    password+="$input_pass"
 done
 }
 
@@ -117,6 +109,8 @@ pass_ex() {
     local input_user
     read -p "${green}Input user ssh: ${clear}" input_user
     user_validate
+    local input_pass
+    local prompt="${green}Input SSH Password: ${clear}"
     pass_validate
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
