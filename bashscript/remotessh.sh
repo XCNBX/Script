@@ -148,7 +148,7 @@ acc_ex() {
     echo -n -e "${green}Input password ssh: ${clear}"
     read -s first_validate
     echo
-    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
     echo
     pass_validate
 
@@ -186,7 +186,7 @@ pass_date() {
     echo -n -e "${green}Input password ssh: ${clear}"
     read -s first_validate
     echo
-    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
     echo
     pass_validate
 
