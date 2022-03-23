@@ -64,7 +64,7 @@ pass_validate() {
     if [[ $first_validate == $input_pass ]]; then
         echo -e "${green}Password Match continue${clear}"
     else
-        echo -e "Password not match enter again retry${clear}"
+        echo -e "${yellow}Password not match enter again retry${clear}"
         exit
     fi
 }
@@ -110,7 +110,7 @@ pass_ex() {
     echo -n -e "${green}Input password ssh: ${clear}"
     read -s first_validate
     echo
-    read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
+    read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
     echo
     pass_validate
 
@@ -189,7 +189,7 @@ pass_date() {
     read -e -p "$green}Validate Password SSH: ${clear}" -s input_pass
     echo
     pass_validate
-    
+
     local file
     read -e -p "${green}Input Server List File eg /abc/abc/acb.txt: ${clear}" file
     file_validate
