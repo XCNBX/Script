@@ -133,8 +133,8 @@ pass_ex() {
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done >>$output
-done >>$output
+    done 2>&1 | tee -a $output
+done 2>&1 | tee -a $output
 
 }
 
@@ -170,8 +170,8 @@ acc_ex() {
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done >>$output
-done >>$output
+    done 2>&1 | tee -a $output
+done 2>&1 | tee -a $output
 
 }
 
@@ -203,12 +203,12 @@ pass_date() {
     do
     echo "======================================"
     echo "Executing command on $serv_list"
-        for each_cmd in "sudo -S chage -d $d_format $acc_name" "chage -l $acc_name | grep 'Last password chage' | cut -d : -f2"
+        for each_cmd in "sudo -S chage -d $d_format $acc_name" "chage -l $acc_name | grep 'Last password change' | cut -d : -f2"
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done >>$output
-done >>$output
+    done 2>&1 | tee -a $output
+done 2>&1 | tee -a $output
 
 }
 
