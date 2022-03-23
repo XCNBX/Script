@@ -110,6 +110,7 @@ pass_ex() {
     read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
+    echo
     pass_validate
 
     local file
@@ -132,8 +133,8 @@ pass_ex() {
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done
-done 2>&1 >>$output
+    done >>$output
+done >>$output
 
 }
 
@@ -146,6 +147,7 @@ acc_ex() {
     read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
+    echo
     pass_validate
 
     local file
@@ -168,8 +170,8 @@ acc_ex() {
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done
-done 2>&1 >>$output
+    done >>$output
+done >>$output
 
 }
 
@@ -182,6 +184,7 @@ pass_date() {
     read -e -p "${green}Input password ssh: ${clear}" -s first_validate
     echo
     read -e -p "${green}Validate Password SSH: ${clear}" -s input_pass
+    echo
     pass_validate
 
     local file
@@ -204,8 +207,8 @@ pass_date() {
         do
         echo "====================================================="
         sshpass -p $input_pass ssh -o StrictHostKeyChecking=No -q -tt "$input_user"@$serv_list "$each_cmd" <<< $(cat pass.txt)
-    done
-done 2>&1 >>$output
+    done >>$output
+done >>$output
 
 }
 
